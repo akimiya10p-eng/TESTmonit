@@ -1,267 +1,598 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miyazaki's Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* --- 基本設定 --- */
-        :root {
-            --primary-color: #2c3e50; /* 信頼感のあるネイビー */
-            --accent-color: #3498db;  /* 知的なブルー */
-            --bg-light: #f9f9f9;
-            --text-color: #333;
-        }
-        body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            margin: 0;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        a { text-decoration: none; color: inherit; }
-        img, video { max-width: 100%; display: block; border-radius: 8px; }
-        
-        /* --- ヘッダー --- */
-        header {
-            background: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 0;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
-        .nav-links a { margin-left: 20px; color: var(--primary-color); font-weight: 500; }
+  <meta charset="UTF-8" />
+  <title>Akira Miyazaki | Engineering × Entertainment Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="大阪公立大学 工学部 宮﨑陽の就活ポートフォリオ。工学の論理とエンタメの熱量で、新しい価値をつくる。">
+  
+  <meta property="og:title" content="Akira Miyazaki Portfolio">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://akimiya10p-eng.github.io/">
+  <meta property="og:image" content="images/profile.jpg">
 
-        /* --- ヒーローセクション（自己紹介） --- */
-        .hero {
-            text-align: center;
-            padding: 60px 0;
-            background: var(--bg-light);
-        }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
-        .btn {
-            display: inline-block;
-            background: var(--accent-color);
-            color: #fff;
-            padding: 10px 25px;
-            border-radius: 25px;
-            transition: 0.3s;
-        }
-        .btn:hover { background: var(--primary-color); }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* --- セクション共通 --- */
-        section { padding: 60px 0; }
-        h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-            position: relative;
-        }
-        h2::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: var(--accent-color);
-            margin: 10px auto 0;
-        }
+  <style>
+    :root {
+      --bg-dark: #050505;
+      --bg-panel: rgba(20, 20, 25, 0.65);
+      --primary: #38bdf8; /* Sky Blue */
+      --secondary: #818cf8; /* Indigo */
+      --accent: #34d399; /* Emerald */
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+      --blur: 20px;
+      --radius: 16px;
+    }
 
-        /* --- Works（活動実績） --- */
-        .work-item {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 60px;
-            align-items: center;
-        }
-        .work-item:nth-child(even) { flex-direction: row-reverse; }
-        .work-content, .work-media { flex: 1; min-width: 300px; }
-        .work-media img { width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .tags span {
-            background: #e1f0fa;
-            color: var(--accent-color);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin-right: 5px;
-        }
-        .doc-link {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 10px;
-            color: var(--primary-color);
-            font-weight: bold;
-            border-bottom: 1px solid var(--accent-color);
-        }
-        .doc-link i { margin-right: 5px; }
+    /* --- Base Setup --- */
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-dark);
+      /* 動く背景グラデーション */
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(129, 140, 248, 0.15), transparent 25%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
 
-        /* --- Gallery（写真・動画） --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        .gallery-item img:hover { transform: scale(1.03); }
-        .video-container video { width: 100%; border-radius: 8px; }
+    /* ノイズテクスチャ（質感を出す） */
+    body::after {
+      content: "";
+      position: fixed; inset: 0; z-index: -1;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
 
-        /* --- Footer --- */
-        footer {
-            background: var(--primary-color);
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-    </style>
+    a { text-decoration: none; color: inherit; transition: 0.3s; }
+    ul { list-style: none; padding: 0; margin: 0; }
+
+    /* --- Layout Utilities --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .glass {
+      background: var(--bg-panel);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .section-padding { padding: 100px 0; }
+    
+    /* --- Header --- */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 15px 0;
+      transition: 0.3s;
+    }
+    header.scrolled {
+      background: rgba(5, 5, 5, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -0.05em; }
+    .logo span { color: var(--primary); }
+    
+    nav { display: flex; gap: 20px; }
+    nav a { 
+      font-size: 0.9rem; font-weight: 500; color: var(--text-muted); 
+      position: relative;
+    }
+    nav a.active, nav a:hover { color: var(--text-main); }
+    nav a.active::after {
+      content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px;
+      background: var(--primary); box-shadow: 0 0 10px var(--primary);
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 60px;
+      position: relative;
+    }
+    
+    .hero-grid {
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-block; padding: 6px 12px; border-radius: 100px;
+      background: rgba(56, 189, 248, 0.1); color: var(--primary);
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.1; font-weight: 900; margin: 0 0 20px;
+      letter-spacing: -0.03em;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 30%, var(--text-muted));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* タイプライター風演出 */
+    .typing-container { font-size: 1.2rem; color: var(--text-muted); height: 1.5em; margin-bottom: 30px; display: flex; align-items: center;}
+    .typing-text::after { content: '|'; animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
+      border-radius: 100px; font-weight: 600; font-size: 0.95rem; transition: 0.3s;
+      cursor: pointer; position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--text-main); color: #000; border: none;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.2); }
+    .btn-glass {
+      background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--border);
+    }
+    .btn-glass:hover { background: rgba(255,255,255,0.1); border-color: var(--text-main); }
+
+    /* Hero Visual (Abstract Code UI) */
+    .hero-visual {
+      position: relative;
+    }
+    .code-card {
+      background: #0f0f12; border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; font-family: 'Courier New', monospace; font-size: 0.8rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      transform: rotate(-3deg); transition: 0.5s;
+    }
+    .code-card:hover { transform: rotate(0deg) scale(1.02); }
+    .code-line { display: block; margin-bottom: 5px; }
+    .c-purple { color: #c084fc; } .c-blue { color: #38bdf8; } .c-green { color: #34d399; } .c-gray { color: #64748b; }
+
+    .profile-circle {
+      position: absolute; bottom: -30px; right: -20px;
+      width: 140px; height: 140px; border-radius: 50%;
+      border: 4px solid var(--bg-dark);
+      background: url('images/profile.jpg') center/cover;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* --- Bento Grid System (Profile & About) --- */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, minmax(180px, auto));
+      gap: 20px;
+    }
+
+    .bento-item {
+      padding: 25px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; transition: 0.3s;
+    }
+    .bento-item:hover { transform: translateY(-5px); border-color: var(--primary); }
+    
+    /* Grid Areas */
+    .bi-1 { grid-column: span 2; grid-row: span 2; } /* Main Bio */
+    .bi-2 { grid-column: span 1; background: linear-gradient(135deg, rgba(56,189,248,0.1), transparent); } /* Stat 1 */
+    .bi-3 { grid-column: span 1; } /* Stat 2 */
+    .bi-4 { grid-column: span 2; } /* Skills */
+
+    .section-title {
+      font-size: 2.5rem; margin-bottom: 40px; font-weight: 800;
+      display: flex; align-items: center; gap: 15px;
+    }
+    .section-title::before { content: ''; width: 6px; height: 40px; background: var(--primary); border-radius: 3px; }
+
+    /* Chart Simulation */
+    .skill-bars { width: 100%; margin-top: 15px; }
+    .bar-item { margin-bottom: 10px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; }
+    .bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+    .bar-fill { height: 100%; border-radius: 3px; background: var(--primary); width: 0; transition: 1s; }
+
+    /* --- Works Section (Cards) --- */
+    .works-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;
+    }
+    .work-card {
+      height: 400px; position: relative; overflow: hidden; group: hover; cursor: pointer;
+    }
+    .work-img {
+      width: 100%; height: 100%; object-fit: cover; transition: 0.5s;
+    }
+    .work-card:hover .work-img { transform: scale(1.1); filter: brightness(0.4); }
+    
+    .work-info {
+      position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
+      transform: translateY(100px); transition: 0.4s; opacity: 0;
+    }
+    .work-card:hover .work-info { transform: translateY(0); opacity: 1; }
+    
+    .work-tags span {
+      font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;
+      background: rgba(255,255,255,0.2); margin-right: 5px;
+    }
+
+    /* --- Process (Steps) --- */
+    .process-flow {
+      display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;
+    }
+    .step-card {
+      min-width: 280px; padding: 25px; position: relative;
+      border-top: 4px solid var(--border);
+    }
+    .step-card:hover { border-color: var(--primary); }
+    .step-num { font-size: 3rem; font-weight: 900; opacity: 0.1; position: absolute; right: 20px; top: 10px; }
+
+    /* --- Document & Media --- */
+    .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .doc-preview {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--border); padding: 60px 0 30px; text-align: center; margin-top: 80px;
+    }
+    .social-links a {
+      font-size: 1.5rem; margin: 0 15px; color: var(--text-muted);
+    }
+    .social-links a:hover { color: var(--primary); }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: left; }
+      .hero-visual { display: none; } /* スマホではコード演出を消してシンプルに */
+      .bento-grid { display: flex; flex-direction: column; }
+      nav { display: none; } /* 簡易化のためスマホメニューは非表示推奨、または要JS実装 */
+      h1 { font-size: 2.5rem; }
+    }
+
+    /* Utilities */
+    .text-accent { color: var(--primary); }
+    .mt-2 { margin-top: 10px; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">My Portfolio</div>
-                <div class="nav-links">
-                    <a href="#about">About</a>
-                    <a href="#works">Works</a>
-                    <a href="#gallery">Gallery</a>
-                </div>
-            </nav>
+  <header id="header">
+    <div class="container nav-wrapper">
+      <div class="logo">AKIRA<span>.DEV</span></div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#works">Works</a>
+        <a href="#process">Process</a>
+        <a href="#docs">Docs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="hero-tag">Job Hunting Portfolio</span>
+        <h1 class="gradient-text">Engineering Logic<br>× Entertainment Heat.</h1>
+        
+        <div class="typing-container">
+          <span id="typing-text" class="typing-text"></span>
         </div>
-    </header>
 
-    <section id="about" class="hero">
-        <div class="container">
-            <img src="images/profile.jpg" alt="プロフィール写真" class="profile-img">
-            <h1>Miyazaki Tarou</h1>
-            <p>大阪公立大学 | 友好祭実行委員会 | なかもず軽音楽部</p>
-            <p>「企画力」と「熱意」で、周囲を巻き込み新しい価値を創造します。</p>
-            <a href="docs/resume_miyazaki.pdf" target="_blank" class="btn">
-                <i class="fas fa-file-pdf"></i> 履歴書を見る
-            </a>
+        <p style="color:var(--text-muted); margin-bottom: 30px; max-width: 500px; line-height: 1.8;">
+          大阪公立大学 工学部 電子物理工学科。
+          <br>論理的思考と、学園祭ライブやバンドで培った「熱狂を生む力」を掛け合わせ、
+          教育とエンタメの新しい接点をデザインします。
+        </p>
+
+        <div class="hero-btns">
+          <a href="#works" class="btn btn-primary">View Projects <i class="fas fa-arrow-right"></i></a>
+          <a href="docs/resume_miyazaki.pdf" target="_blank" class="btn btn-glass"><i class="far fa-file-pdf"></i> Resume</a>
         </div>
-    </section>
+      </div>
 
-    <section id="works">
-        <div class="container">
-            <h2>Main Works</h2>
+      <div class="hero-visual">
+        <div class="code-card glass">
+          <span class="code-line c-gray">// Defines Akira's Core Value</span>
+          <span class="code-line"><span class="c-purple">class</span> <span class="c-blue">AkiraMiyazaki</span> {</span>
+          <span class="code-line">&nbsp;&nbsp;<span class="c-purple">constructor</span>() {</span>
+          <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-blue">this</span>.major = <span class="c-green">'Electronic Physics'</span>;</span>
+          <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-blue">this</span>.passion = [<span class="c-green">'Music'</span>, <span class="c-green">'Event'</span>, <span class="c-green">'Education'</span>];</span>
+          <span class="code-line">&nbsp;&nbsp;}</span>
+          <span class="code-line">&nbsp;&nbsp;<span class="c-purple">createValue</span>() {</span>
+          <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-purple">return</span> <span class="c-blue">Logic</span> * <span class="c-blue">Heat</span>;</span>
+          <span class="code-line">&nbsp;&nbsp;}</span>
+          <span class="code-line">}</span>
+        </div>
+        <div class="profile-circle"></div>
+      </div>
+    </div>
+  </section>
 
-            <div class="work-item">
-                <div class="work-media">
-                    <img src="images/work-fes-main.jpg" alt="友好祭の様子">
-                </div>
-                <div class="work-content">
-                    <h3>友好祭実行委員会 - ステージ企画統括</h3>
-                    <div class="tags">
-                        <span>リーダーシップ</span>
-                        <span>企画運営</span>
-                        <span>折衝力</span>
-                    </div>
-                    <p>来場者数X万人を誇る大学祭にて、メインステージの企画・運営を担当しました。出演者や機材業者との調整を行い、トラブルのない進行を実現しました。</p>
-                    
-                    <a href="docs/plan_live.pdf" target="_blank" class="doc-link">
-                        <i class="fas fa-file-alt"></i> ステージ企画書を見る (PDF)
-                    </a>
-                    <br>
-                    <a href="docs/plan_edu_entertainment.pdf" target="_blank" class="doc-link">
-                        <i class="fas fa-file-alt"></i> 教育企画案を見る (PDF)
-                    </a>
-                </div>
+  <section id="about" class="section-padding">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="bento-grid">
+        
+        <div class="glass bento-item bi-1">
+          <div>
+            <h3 style="font-size:1.5rem; margin:0 0 15px;"><i class="fas fa-user-astronaut text-accent"></i> Who I am</h3>
+            <p style="color:var(--text-muted); line-height:1.8; font-size:0.95rem;">
+              「真面目なことを、ちゃんと面白く」がモットー。<br>
+              工学専攻でありながら、学園祭実行委員として数万人規模のイベント運営に携わり、赤字企画を黒字化へ導きました。<br><br>
+              「エンジニアの論理性」と「プロデューサーの視点」の両方を行き来できるのが最大の強みです。
+            </p>
+          </div>
+          <div style="margin-top:20px;">
+             <span class="hero-tag" style="margin:0;">#Logic</span>
+             <span class="hero-tag" style="margin:0;">#Creativity</span>
+             <span class="hero-tag" style="margin:0;">#Education</span>
+          </div>
+        </div>
+
+        <div class="glass bento-item bi-2">
+          <h4 style="margin:0; color:var(--text-muted);">Total Sales</h4>
+          <div style="font-size:2.5rem; font-weight:800; color:var(--text-main);">1,167<span style="font-size:1rem;"> tickets</span></div>
+          <div style="font-size:0.8rem; color:var(--accent);">Ticket Sold Out (2 years)</div>
+          <i class="fas fa-ticket-alt" style="position:absolute; bottom:20px; right:20px; font-size:3rem; opacity:0.1;"></i>
+        </div>
+
+        <div class="glass bento-item bi-3">
+          <h4 style="margin:0; color:var(--text-muted);">Growth</h4>
+          <div style="font-size:2.5rem; font-weight:800; color:var(--text-main);">+28</div>
+          <div style="font-size:0.8rem; color:var(--secondary);">Deviation Score Up</div>
+          <i class="fas fa-chart-line" style="position:absolute; bottom:20px; right:20px; font-size:3rem; opacity:0.1;"></i>
+        </div>
+
+        <div class="glass bento-item bi-4">
+          <h3 style="margin:0 0 15px;">Skill Set</h3>
+          <div class="skill-bars">
+            <div class="bar-item">
+              <div class="bar-label"><span>Event Planning & Management</span><span>95%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width:95%;"></div></div>
             </div>
-
-            <div class="work-item">
-                <div class="work-media">
-                    <img src="images/work-band-main.jpg" alt="バンド演奏">
-                </div>
-                <div class="work-content">
-                    <h3>なかもず軽音楽部 - 部長</h3>
-                    <div class="tags">
-                        <span>チームビルディング</span>
-                        <span>継続力</span>
-                        <span>Guitar</span>
-                    </div>
-                    <p>部員100名を超える軽音部の部長として、練習環境の改善や新歓イベントのオンライン化を推進。退部率を昨対比で20%削減しました。</p>
-                    
-                    <div style="margin-top: 15px;">
-                        <p><small>▼ ライブパフォーマンス (Short Ver.)</small></p>
-                        <video controls src="videos/band-live-short.mp4" poster="images/gallery-band-live.jpg" style="max-height: 200px;"></video>
-                    </div>
-                </div>
+            <div class="bar-item">
+              <div class="bar-label"><span>Data Analysis (Excel/Stats)</span><span>80%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width:80%; background:var(--secondary);"></div></div>
             </div>
-
-            <div class="work-item">
-                <div class="work-media">
-                    <img src="images/work-teacher-main.jpg" alt="教育実習">
-                </div>
-                <div class="work-content">
-                    <h3>教育実習・学習支援ボランティア</h3>
-                    <div class="tags">
-                        <span>プレゼン力</span>
-                        <span>傾聴力</span>
-                    </div>
-                    <p>教育実習では「生徒が主体的に考える授業」をテーマに指導案を作成。生徒アンケートで高評価をいただきました。</p>
-                    <a href="docs/teacher_progress.pdf" target="_blank" class="doc-link">
-                        <i class="fas fa-file-alt"></i> 実習報告書・指導案 (PDF)
-                    </a>
-                </div>
+            <div class="bar-item">
+              <div class="bar-label"><span>Creative (Music/Video/Design)</span><span>70%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width:70%; background:var(--accent);"></div></div>
             </div>
-
-        </div>
-    </section>
-
-    <section id="gallery" style="background: #f9f9f9;">
-        <div class="container">
-            <h2>Gallery & Videos</h2>
-            <p style="text-align: center; margin-bottom: 30px;">活動の様子を写真と動画で紹介します。</p>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="images/gallery-fes-crowd.jpg" alt="学祭の観衆"></div>
-                <div class="gallery-item"><img src="images/gallery-fes-stage.jpg" alt="学祭ステージ"></div>
-                <div class="gallery-item"><img src="images/gallery-fes-backstage.jpg" alt="学祭裏方"></div>
-                <div class="gallery-item"><img src="images/gallery-guitar.jpg" alt="ギター"></div>
-                <div class="gallery-item"><img src="images/gallery-teacher.jpg" alt="授業風景"></div>
-                
-                <div class="gallery-item video-container">
-                    <video controls src="videos/fes-digest.mp4" style="width: 100%; height: 200px; object-fit: cover;"></video>
-                    <p style="font-size: 0.8rem; text-align: center;">友好祭ダイジェスト</p>
-                </div>
+            <div class="bar-item">
+              <div class="bar-label"><span>Physics & Math</span><span>85%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width:85%; background:#c084fc;"></div></div>
             </div>
+          </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Miyazaki Tarou. All Rights Reserved.</p>
-            <p style="font-size: 0.8rem;">Created for Job Application</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" class="section-padding">
+    <div class="container">
+      <h2 class="section-title">Selected Works</h2>
+      <div class="works-grid">
+        
+        <div class="glass work-card">
+          <img src="images/work-fes-main.jpg" class="work-img" alt="学園祭">
+          <div class="work-info glass">
+            <h3 style="margin:0 0 5px;">学園祭ライブ統括</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted);">1000人規模のライブを企画・黒字化</p>
+            <div class="work-tags mt-2">
+              <span>Management</span><span>Marketing</span>
+            </div>
+            <a href="docs/plan_live.pdf" target="_blank" class="btn btn-primary mt-2" style="padding:8px 16px; font-size:0.8rem;">PDF企画書</a>
+          </div>
         </div>
-    </footer>
 
+        <div class="glass work-card">
+          <img src="images/work-band-main.jpg" class="work-img" alt="バンド">
+          <div class="work-info glass">
+            <h3 style="margin:0 0 5px;">バンド活動 (Gt/Vo)</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted);">作詞作曲・部員100名の部長経験</p>
+            <div class="work-tags mt-2">
+              <span>Music</span><span>Leadership</span>
+            </div>
+            <a href="#media" class="btn btn-primary mt-2" style="padding:8px 16px; font-size:0.8rem;">動画を見る</a>
+          </div>
+        </div>
+
+        <div class="glass work-card">
+          <img src="images/work-teacher-main.jpg" class="work-img" alt="家庭教師">
+          <div class="work-info glass">
+            <h3 style="margin:0 0 5px;">数学家庭教師</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted);">データ分析による成績向上指導</p>
+            <div class="work-tags mt-2">
+              <span>Education</span><span>Analytics</span>
+            </div>
+            <a href="docs/teacher_progress.pdf" target="_blank" class="btn btn-primary mt-2" style="padding:8px 16px; font-size:0.8rem;">指導案PDF</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="section-padding">
+    <div class="container">
+      <h2 class="section-title">My Process</h2>
+      <div class="process-flow">
+        
+        <div class="glass step-card">
+          <span class="step-num">01</span>
+          <h4>問いの再定義</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">
+            「なぜやるのか」「成功とは何か」を言語化し、表面的な課題ではなく本質的な目的を設定する。
+          </p>
+        </div>
+
+        <div class="glass step-card">
+          <span class="step-num">02</span>
+          <h4>構造化と分解</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">
+            予算・時間・人員などのリソースを把握し、タスクを「変えられないもの」と「工夫できるもの」に分解する。
+          </p>
+        </div>
+
+        <div class="glass step-card">
+          <span class="step-num">03</span>
+          <h4>仮説と検証</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">
+            数字（データ）と感情（エモさ）の両面から仮説を立て、プロトタイプを用いて小さく速く検証する。
+          </p>
+        </div>
+
+        <div class="glass step-card">
+          <span class="step-num">04</span>
+          <h4>余白の設計</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">
+            完璧な計画を目指しつつ、トラブルに備えた「余白」と「代替案」を用意し、現場での即応力を担保する。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="docs" class="section-padding">
+    <div class="container">
+      <h2 class="section-title">Archives</h2>
+      <div class="doc-grid">
+        <div class="glass" style="padding:20px;">
+          <h3 style="font-size:1.1rem;"><i class="far fa-file-pdf"></i> 企画書・レポート</h3>
+          <ul style="margin-top:15px; font-size:0.9rem; line-height:2;">
+            <li><a href="docs/plan_live.pdf" target="_blank" class="text-accent">學園祭ライブ企画書.pdf <i class="fas fa-external-link-alt"></i></a></li>
+            <li><a href="docs/plan_edu_entertainment.pdf" target="_blank" class="text-accent">教育エンタメ企画案.pdf <i class="fas fa-external-link-alt"></i></a></li>
+            <li><a href="docs/teacher_progress.pdf" target="_blank" class="text-accent">指導進捗報告書.pdf <i class="fas fa-external-link-alt"></i></a></li>
+          </ul>
+        </div>
+        <div class="glass" style="padding:20px;">
+          <h3 style="font-size:1.1rem;"><i class="fas fa-video"></i> 活動動画</h3>
+          <div style="display:flex; gap:10px; margin-top:15px;">
+            <div style="flex:1;">
+              <video controls poster="images/work-fes-main.jpg" style="width:100%; border-radius:8px;">
+                <source src="videos/fes-digest.mp4" type="video/mp4">
+              </video>
+              <p style="font-size:0.75rem; text-align:center;">Fes Digest</p>
+            </div>
+            <div style="flex:1;">
+              <video controls poster="images/gallery-band-live.jpg" style="width:100%; border-radius:8px;">
+                <source src="videos/band-live-short.mp4" type="video/mp4">
+              </video>
+              <p style="font-size:0.75rem; text-align:center;">Band Live</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section-padding" style="text-align:center;">
+    <div class="container">
+      <div class="glass" style="padding:50px; max-width:700px; margin:0 auto;">
+        <h2>Let's Create Something New.</h2>
+        <p style="color:var(--text-muted); margin-bottom:30px;">
+          ここまでご覧いただきありがとうございます。<br>
+          より詳しいお話ができることを楽しみにしています。
+        </p>
+        <a href="mailto:akimiya10p@gmail.com" class="btn btn-primary">
+          <i class="fas fa-envelope"></i> Contact Me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/akimiya10p-eng" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://x.com/Taki_Renya" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p style="margin-top:20px; color:var(--text-muted); font-size:0.8rem;">
+        &copy; 2025 Akira Miyazaki. Built with Logic & Passion.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // 1. タイプライター演出
+    const textElement = document.getElementById('typing-text');
+    const phrases = ["Analyzing Structures...", "Designing Events...", "Creating Excitement.", "Engineering × Entertainment"];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      if (isDeleting) {
+        textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        typeSpeed = 2000; // 打ち終わったら少し待つ
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(type, typeSpeed);
+    }
+    document.addEventListener('DOMContentLoaded', type);
+
+    // 2. スクロールでヘッダーの色を変える
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      // ナビゲーションの現在地ハイライト
+      const sections = document.querySelectorAll('section');
+      const navLi = document.querySelectorAll('nav a');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLi.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) {
+          a.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
