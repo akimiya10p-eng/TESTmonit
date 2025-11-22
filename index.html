@@ -13,266 +13,247 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      /* --- Color Palette: Sophisticated Gold & Mono --- */
-      --bg-main: #FFFFFF;       /* クリーンな白 */
-      --bg-sub: #F8F8F8;        /* 非常に薄いグレー（セクション背景用） */
-      --bg-footer-L: #222222;   /* フッター左側の濃いグレー */
-      --bg-footer-R: #333333;   /* フッター右側の少し明るいグレー */
+      /* --- Apple Color Palette --- */
+      --bg-light: #FFFFFF;      /* 純粋な白 */
+      --bg-dark: #000000;       /* 純粋な黒 */
+      --bg-gray: #F5F5F7;       /* Apple製品ページでよく見る薄いグレー */
       
-      /* アクセントカラー：落ち着いたゴールド */
-      --primary: #C4A664;       
+      --text-light: #1D1D1F;    /* ほぼ黒のテキスト */
+      --text-dark: #F5F5F7;     /* ほぼ白のテキスト */
+      --text-muted: #86868B;    /* グレーのテキスト */
       
-      /* テキストカラー */
-      --text-main: #333333;     /* メインの黒 */
-      --text-muted: #777777;    /* サブのグレー */
-      --text-white: #FFFFFF;    /* フッター用などの白 */
+      --accent: #0071e3;        /* Appleブルー */
+      --accent-hover: #0077ED;
       
-      --border: #E5E5E5;        /* 薄いグレーの境界線 */
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 控えめで上品な影 */
-      --radius: 8px;            /* 小さめの角丸でシャープに */
+      --radius: 18px;           /* Appleらしい丸み */
     }
 
     /* --- Base Setup --- */
-    * { box-sizing: border-box; scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     
     body {
       margin: 0;
-      font-family: 'Montserrat', 'Noto Sans JP', sans-serif; /* 英語はMontserrat, 日本語はNoto Sans JP */
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.8;
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      line-height: 1.6;
       overflow-x: hidden;
-      letter-spacing: 0.03em; /* 少し文字間を空けて洗練させる */
+      letter-spacing: -0.02em; /* 文字間を少し詰めてタイトに */
     }
 
     a { text-decoration: none; color: inherit; transition: 0.3s; }
     ul { list-style: none; padding: 0; margin: 0; }
+    img, video { display: block; max-width: 100%; height: auto; }
 
     /* --- Layout Utilities --- */
     .container {
-      max-width: 1000px; margin: 0 auto; padding: 0 24px;
+      max-width: 1024px; /* Appleは少し狭めのコンテナを好む */
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    /* 画面幅いっぱいのコンテナ */
+    .container-full {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .section-padding { padding: 100px 0; }
+    .section-padding { padding: 150px 0; } /* 圧倒的な余白 */
     
-    .card-panel {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: 0.3s;
-    }
-    .card-panel:hover {
-      border-color: var(--primary);
-      box-shadow: 0 8px 24px rgba(196, 166, 100, 0.15);
-    }
+    /* --- Typography --- */
+    h1, h2, h3 { font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+    .text-large { font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; }
+    .text-medium { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 600; }
+    .text-body { font-size: 1.1rem; font-weight: 400; color: var(--text-muted); }
+    .text-accent { color: var(--accent); }
 
-    /* --- Header --- */
+    /* --- Header (Global Nav) --- */
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       padding: 16px 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.8); /* 半透明の白 */
+      backdrop-filter: blur(20px); /* すりガラス効果 */
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: 0.3s;
     }
+    /* 黒背景セクション用のヘッダー設定 */
+    body.dark-mode header {
+      background: rgba(0, 0, 0, 0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    body.dark-mode .logo, body.dark-mode nav a { color: var(--text-dark); }
     
     .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
     
-    .logo { 
-      font-weight: 700; font-size: 1.2rem; color: var(--text-main); 
-      letter-spacing: 0.05em;
-    }
-    .logo span { color: var(--primary); }
+    .logo { font-weight: 700; font-size: 1.1rem; color: var(--text-light); }
     
-    nav { display: flex; gap: 24px; }
+    nav { display: flex; gap: 32px; }
     nav a { 
-      font-size: 0.85rem; font-weight: 600; color: var(--text-muted); 
-      text-transform: uppercase; letter-spacing: 0.05em; position: relative;
+      font-size: 0.85rem; font-weight: 500; color: var(--text-light); opacity: 0.8;
     }
-    nav a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-      background: var(--primary); transition: 0.3s;
-    }
-    nav a.active, nav a:hover { color: var(--text-main); }
-    nav a.active::after, nav a:hover::after { width: 100%; }
+    nav a:hover { opacity: 1; color: var(--accent); }
 
     /* --- Hero Section --- */
     .hero {
       min-height: 90vh; display: flex; align-items: center; padding-top: 80px;
+      text-align: center;
     }
-    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-
+    .hero-content { max-width: 800px; margin: 0 auto 60px; }
+    
     .hero-tag {
       display: inline-block; 
-      color: var(--primary);
-      font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; 
-      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--accent); font-size: 0.9rem; font-weight: 600; margin-bottom: 24px;
     }
-
-    h1 {
-      font-size: clamp(2.4rem, 4vw, 3.6rem);
-      line-height: 1.2; font-weight: 700; margin: 0 0 24px; color: var(--text-main);
-    }
-    
-    .text-highlight { color: var(--primary); }
 
     /* タイプライター演出（シンプルに） */
     .typing-container { 
-      font-size: 1.1rem; color: var(--text-muted); height: 1.5em; 
-      margin-bottom: 32px; display: flex; align-items: center;
-      font-family: 'Courier New', monospace; /* タイプライターらしさを出す */
+      font-size: 1.2rem; color: var(--text-muted); height: 1.5em; 
+      margin: 0 auto 32px; display: flex; align-items: center; justify-content: center;
     }
-    .typing-text::after { content: '_'; animation: blink 1s infinite; color: var(--primary); }
+    .typing-text::after { content: '|'; animation: blink 1s infinite; color: var(--accent); }
     @keyframes blink { 50% { opacity: 0; } }
 
-    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px; padding: 12px 32px;
-      font-weight: 600; font-size: 0.9rem; transition: 0.3s;
-      cursor: pointer; border-radius: var(--radius);
-      text-transform: uppercase; letter-spacing: 0.05em;
+      font-weight: 500; font-size: 0.9rem; transition: 0.3s;
+      cursor: pointer; border-radius: 100px;
     }
     .btn-primary {
-      background: var(--text-main); color: var(--text-white); border: 1px solid var(--text-main);
+      background: var(--accent); color: #fff;
     }
-    .btn-primary:hover { background: var(--primary); border-color: var(--primary); }
-    
-    .btn-outline {
-      background: #fff; color: var(--text-main); border: 1px solid var(--border);
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-text {
+      color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 5px;
     }
-    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-text:hover { text-decoration: underline; }
 
-    /* Hero Visual (Simple & Clean) */
-    .hero-visual { display: flex; justify-content: center; }
-    .profile-img {
-      width: 280px; height: 280px; object-fit: cover; 
-      border-radius: 50%; /* シンプルな円形 */
-      border: 4px solid #fff;
-      box-shadow: 0 0 0 2px var(--primary), var(--shadow); /* 二重線でゴールドのアクセント */
-    }
-
-    /* --- Bento Grid System (Clean Ver.) --- */
-    .bento-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, minmax(200px, auto)); gap: 24px;
-    }
-    .bento-item { padding: 32px; display: flex; flex-direction: column; justify-content: space-between; }
-    .bi-1 { grid-column: span 2; grid-row: span 2; } 
-    .bi-2, .bi-3 { grid-column: span 1; text-align: center; justify-content: center; } 
-    .bi-4 { grid-column: span 2; } 
-
-    .section-title {
-      font-size: 1.8rem; margin-bottom: 60px; font-weight: 700;
-      color: var(--text-main); text-align: center;
-      text-transform: uppercase; letter-spacing: 0.1em;
+    /* Hero Visual (Parallax Image) */
+    .hero-visual {
+      width: 100%; height: 60vh; overflow: hidden; border-radius: var(--radius);
       position: relative;
     }
-    /* タイトル下の装飾線をシンプルに */
-    .section-title::after {
-      content: ''; display: block; width: 40px; height: 2px; background: var(--primary);
-      margin: 16px auto 0;
+    .hero-img {
+      width: 100%; height: 120%; /* パララックス用に少し縦長に */
+      object-fit: cover; object-position: center;
+      /* 初期位置を少し上にずらす */
+      transform: translateY(-10%);
     }
 
-    /* Chart (Gold) */
-    .skill-bars { width: 100%; margin-top: 24px; }
-    .bar-item { margin-bottom: 16px; }
-    .bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; color: var(--text-muted); font-weight: 500; }
-    .bar-bg { width: 100%; height: 6px; background: var(--border); border-radius: 6px; overflow: hidden; }
-    .bar-fill { height: 100%; background: var(--primary); width: 0; transition: 1s; border-radius: 6px; }
+    /* --- Sections --- */
+    /* 黒背景セクション */
+    .section-dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .section-dark .text-body { color: #A1A1A6; } /* 黒背景用のグレー */
+    .section-dark .btn-text { color: #2997FF; } /* 黒背景用の明るいブルー */
 
-    /* --- Works Section (Clean Cards) --- */
+    /* グレー背景セクション */
+    .section-gray {
+      background-color: var(--bg-gray);
+    }
+
+    /* --- About (Bento Grid Apple Ver.) --- */
+    .bento-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+    }
+    .bento-item {
+      padding: 48px; border-radius: var(--radius);
+      background: var(--bg-light);
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; position: relative;
+    }
+    .bi-large { grid-column: span 2; min-height: 400px; }
+    .bi-small { min-height: 300px; text-align: center; align-items: center; }
+    
+    /* 統計数字のスタイル */
+    .stat-num { 
+      font-size: clamp(3rem, 6vw, 5rem); font-weight: 700; line-height: 1; 
+      background: linear-gradient(135deg, var(--text-light), var(--text-muted));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-dark .stat-num {
+      background: linear-gradient(135deg, var(--text-dark), #A1A1A6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* Skills Chart (Minimal) */
+    .skill-bars { width: 100%; margin-top: 32px; }
+    .bar-item { margin-bottom: 24px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; font-weight: 500; }
+    .bar-bg { width: 100%; height: 8px; background: var(--bg-gray); border-radius: 10px; overflow: hidden; }
+    .section-dark .bar-bg { background: #333; }
+    .bar-fill { height: 100%; background: var(--accent); width: 0; transition: 1s; border-radius: 10px; }
+
+    /* --- Works Section (Large Cards) --- */
     .works-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+      display: flex; flex-direction: column; gap: 100px;
     }
-    .work-card {
-      border-radius: var(--radius); overflow: hidden; background: #fff;
-      border: 1px solid var(--border); transition: 0.3s;
+    .work-item {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
     }
-    .work-card:hover { border-color: var(--primary); box-shadow: var(--shadow); }
-    .work-img-wrapper { height: 200px; overflow: hidden; }
-    .work-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-    .work-card:hover .work-img { transform: scale(1.03); }
-    .work-info { padding: 24px; }
-    .work-cat {
-      display: inline-block; font-size: 0.7rem; color: var(--primary);
-      margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .work-title-en {
-      font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 4px;
-      text-transform: uppercase;
-    }
-    .work-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 12px; color: var(--text-main); }
-    .work-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; line-height: 1.6; }
+    /* 偶数番目の要素を左右逆にする */
+    .work-item:nth-child(even) { direction: rtl; }
+    .work-item:nth-child(even) .work-content { direction: ltr; }
 
-    /* --- Process (Clean Steps) --- */
-    .process-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
-    .step-card {
-      padding: 32px; background: #fff; text-align: center;
-      border-top: 3px solid var(--primary); /* 上部にゴールドのライン */
+    .work-visual {
+      height: 500px; border-radius: var(--radius); overflow: hidden; position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     }
+    .work-img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    /* ホバー時のズーム（ゆっくりとリッチに） */
+    .work-visual:hover .work-img { transform: scale(1.05); }
+
+    /* --- Process (Minimal Steps) --- */
+    .process-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+    .step-item { text-align: center; }
     .step-num { 
-      display: inline-block; font-family: 'Montserrat', sans-serif;
-      color: var(--primary); font-weight: 700; font-size: 2.5rem; line-height: 1;
-      margin-bottom: 16px; opacity: 0.5;
+      font-size: 1.2rem; font-weight: 700; color: var(--accent); margin-bottom: 16px;
+      display: block;
     }
-    .step-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
 
-    /* --- Docs & Footer --- */
-    #docs { background: var(--bg-sub); } /* アーカイブセクションだけ背景を薄いグレーに */
+    /* --- Archives (Docs & Media) --- */
     .doc-list li {
-      padding: 16px 0; border-bottom: 1px solid var(--border);
+      padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.1);
       display: flex; justify-content: space-between; align-items: center;
     }
-    .doc-list li:hover a { color: var(--primary); }
+    .section-dark .doc-list li { border-color: rgba(255,255,255,0.1); }
     .doc-list a { 
-      color: var(--text-main); display: flex; align-items: center; gap: 12px; font-weight: 600;
+      font-weight: 500; display: flex; align-items: center; gap: 12px;
     }
-    .doc-icon { color: var(--primary); font-size: 1.2rem; }
+    .doc-list a:hover { color: var(--accent); }
 
-    /* フッター（画像のような2トーン背景） */
+    /* Footer */
     footer {
-      background: linear-gradient(to right, var(--bg-footer-L) 60%, var(--bg-footer-R) 40%);
-      color: var(--text-white); padding: 80px 0; margin-top: 80px;
+      background: var(--bg-gray); padding: 80px 0; font-size: 0.85rem; color: var(--text-muted);
     }
-    .footer-content { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; }
-    .footer-logo { 
-      font-weight: 700; font-size: 1.4rem; color: var(--text-white); margin-bottom: 24px;
-      letter-spacing: 0.05em;
-    }
-    .footer-logo span { color: var(--primary); }
-    .footer-links a {
-      color: #AAAAAA; margin-right: 24px; font-size: 0.85rem; transition: 0.3s;
-    }
-    .footer-links a:hover { color: var(--primary); }
-    .copyright { margin-top: 40px; font-size: 0.8rem; color: #888888; }
-    
-    .contact-heading {
-      font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; color: var(--text-white);
-    }
-    .contact-btn {
-      display: inline-flex; align-items: center; gap: 8px; padding: 12px 32px;
-      background: var(--primary); color: var(--text-white); border-radius: var(--radius);
-      font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .contact-btn:hover { filter: brightness(1.1); }
+    .footer-links a { margin-right: 24px; color: var(--text-light); }
+    .footer-links a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* --- Animation Utilities (GSAP用) --- */
+    .fade-up { opacity: 0; transform: translateY(30px); }
+    .img-parallax { will-change: transform; } /* パフォーマンス最適化 */
 
     /* --- Mobile --- */
     @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-      .hero-btns { justify-content: center; }
-      .hero-visual { order: -1; }
-      .profile-img { width: 220px; height: 220px; }
-      .bento-grid { display: flex; flex-direction: column; }
-      footer { background: var(--bg-footer-L); } /* スマホでは単色背景に */
-      .footer-content { grid-template-columns: 1fr; gap: 40px; }
-      nav { display: none; } 
-      h1 { font-size: 2rem; }
+      .text-large { font-size: 2.5rem; }
+      .hero-btns { flex-direction: column; gap: 12px; }
+      .hero-visual { height: 40vh; }
+      .bento-grid, .process-flow { grid-template-columns: 1fr; }
+      .work-item, .work-item:nth-child(even) { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
+      .work-visual { height: 300px; }
+      nav { display: none; }
+      .section-padding { padding: 80px 0; }
     }
   </style>
 </head>
@@ -280,9 +261,9 @@
 
   <header id="header">
     <div class="container nav-wrapper">
-      <div class="logo">AKIRA <span>MIYAZAKI</span></div>
+      <div class="logo">Akira Miyazaki</div>
       <nav>
-        <a href="#about">Profile</a>
+        <a href="#about">About</a>
         <a href="#works">Works</a>
         <a href="#process">Process</a>
         <a href="#docs">Archives</a>
@@ -291,65 +272,69 @@
   </header>
 
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <span class="hero-tag">Portfolio</span>
-        <h1>Engineering Logic<br>& <span class="text-highlight">Entertainment Heat</span>.</h1>
+    <div class="container-full">
+      <div class="hero-content fade-up">
+        <span class="hero-tag">Portfolio 2025</span>
+        <h1 class="text-large">Engineering Logic.<br>Entertainment Heat.</h1>
         
         <div class="typing-container">
           <span id="typing-text" class="typing-text"></span>
         </div>
 
-        <p style="color:var(--text-muted); margin-bottom: 40px; max-width: 480px;">
-          大阪公立大学 工学部の宮﨑陽です。
-          <br>エンジニアリングの「論理」と、エンターテインメントの現場で培った「熱量」。
-          この二つを掛け合わせ、人の心を動かす価値を創造します。
+        <p class="text-body" style="max-width:500px; margin:0 auto 40px;">
+          大阪公立大学 工学部。<br>
+          論理と熱量を掛け合わせ、心を動かす体験を設計します。
         </p>
 
         <div class="hero-btns">
-          <a href="#works" class="btn btn-primary">View Works <i class="fas fa-arrow-right"></i></a>
-          <a href="docs/resume_miyazaki.pdf" target="_blank" class="btn btn-outline">Resume (PDF)</a>
+          <a href="#works" class="btn btn-primary">実績を見る</a>
+          <a href="docs/resume_miyazaki.pdf" target="_blank" class="btn-text">履歴書 (PDF) <i class="fas fa-chevron-right" style="font-size:0.8rem;"></i></a>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <img src="images/profile.jpg" alt="Profile" class="profile-img">
+      <div class="hero-visual fade-up">
+        <img src="images/profile.jpg" alt="Profile" class="hero-img img-parallax">
       </div>
     </div>
   </section>
 
-  <section id="about" class="section-padding">
+  <section id="about" class="section-dark section-padding">
     <div class="container">
-      <h2 class="section-title">Profile & Stats</h2>
+      <div class="fade-up" style="text-align:center; margin-bottom:80px;">
+        <h2 class="text-medium">Two Perspectives. One Vision.</h2>
+        <p class="text-body" style="max-width:600px; margin:24px auto 0;">
+          異なる視点を行き来し、再現性のあるロジックで、<br>予測不可能な熱狂を生み出します。
+        </p>
+      </div>
+      
       <div class="bento-grid">
-        
-        <div class="card-panel bento-item bi-1">
+        <div class="bento-item bi-large section-dark fade-up" style="background:#111;">
           <div>
-            <h3 style="font-size:1.3rem; margin:0 0 24px; color:var(--text-main); font-weight:700;">
-              <span style="color:var(--primary);">ENG</span>INEERING × <span style="color:var(--primary);">ENT</span>ERTAINMENT
+            <h3 class="text-medium" style="margin-bottom:24px;">
+              <span style="color:#2997FF;">Eng</span>ineering × <span style="color:#2997FF;">Ent</span>ertainment
             </h3>
-            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.9;">
+            <p class="text-body">
               専攻である電子物理工学で培った「構造を捉える論理的思考」と、
               学園祭実行委員やバンド活動で培った「人を巻き込むプロデュース力」。<br><br>
-              この異なる視点を行き来し、再現性のあるロジックで、予測不可能な熱狂を生み出すことを目指しています。
+              「真面目なことを、ちゃんと面白く」をモットーに、
+              新しい価値の創造に挑戦し続けています。
             </p>
           </div>
         </div>
 
-        <div class="card-panel bento-item bi-2">
-          <h4 style="margin:0; color:var(--text-muted); font-size:0.85rem; font-weight:600; text-transform:uppercase;">Total Tickets</h4>
-          <div style="font-size:3rem; font-weight:700; color:var(--primary); line-height:1; margin:16px 0; font-family:'Montserrat';">1,167</div>
-          <div style="font-size:0.8rem; color:var(--text-main); font-weight:600;">2年連続完売を達成</div>
+        <div class="bento-item bi-small section-dark fade-up" style="background:#111;">
+          <h4 class="text-body">Total Tickets</h4>
+          <div class="stat-num">1,167</div>
+          <div class="text-body" style="font-size:0.9rem;">2年連続完売を達成</div>
+        </div>
+        <div class="bento-item bi-small section-dark fade-up" style="background:#111;">
+          <h4 class="text-body">Score Growth</h4>
+          <div class="stat-num">+28</div>
+          <div class="text-body" style="font-size:0.9rem;">家庭教師での偏差値向上</div>
         </div>
 
-        <div class="card-panel bento-item bi-3">
-          <h4 style="margin:0; color:var(--text-muted); font-size:0.85rem; font-weight:600; text-transform:uppercase;">Score Growth</h4>
-          <div style="font-size:3rem; font-weight:700; color:var(--primary); line-height:1; margin:16px 0; font-family:'Montserrat';">+28</div>
-          <div style="font-size:0.8rem; color:var(--text-main); font-weight:600;">家庭教師での偏差値向上</div>
-        </div>
-
-        <div class="card-panel bento-item bi-4">
-          <h3 style="margin:0 0 24px; font-size:1.2rem; font-weight:700;">Core Skills</h3>
+        <div class="bento-item bi-large section-dark fade-up" style="background:#111;">
+          <h3 class="text-medium" style="margin-bottom:24px;">Core Skills.</h3>
           <div class="skill-bars">
             <div class="bar-item">
               <div class="bar-label"><span>イベント企画・プロデュース</span><span>95%</span></div>
@@ -365,176 +350,223 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
   <section id="works" class="section-padding">
     <div class="container">
-      <h2 class="section-title">Selected Works</h2>
+      <h2 class="text-medium fade-up" style="margin-bottom:80px; text-align:center;">Selected Works.</h2>
+      
       <div class="works-grid">
-        
-        <div class="work-card">
-          <div class="work-img-wrapper">
-            <img src="images/work-fes-main.jpg" class="work-img" alt="Fes">
+        <div class="work-item">
+          <div class="work-visual fade-up">
+            <img src="images/work-fes-main.jpg" alt="Fes" class="work-img">
           </div>
-          <div class="work-info">
-            <div class="work-title-en">PRODUCING</div>
-            <h3 class="work-title">学園祭ライブ統括</h3>
-            <p class="work-desc">
-              1000人規模のライブ企画を再建。広告戦略の見直しにより、2年連続の黒字化を達成しました。
+          <div class="work-content fade-up">
+            <span class="hero-tag">Producing</span>
+            <h3 class="text-medium" style="margin-bottom:16px;">学園祭ライブ統括</h3>
+            <p class="text-body" style="margin-bottom:32px;">
+              1000人規模のライブ企画を再建。広告戦略の見直しと出演者交渉により、2年連続の黒字化を達成しました。
             </p>
-            <a href="docs/plan_live.pdf" target="_blank" style="color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; gap:8px;">VIEW PLAN <i class="fas fa-arrow-right"></i></a>
+            <a href="docs/plan_live.pdf" target="_blank" class="btn-text">
+              企画書を見る <i class="fas fa-chevron-right" style="font-size:0.8rem;"></i>
+            </a>
           </div>
         </div>
 
-        <div class="work-card">
-          <div class="work-img-wrapper">
-            <img src="images/work-band-main.jpg" class="work-img" alt="Band">
+        <div class="work-item">
+          <div class="work-visual fade-up">
+            <img src="images/work-band-main.jpg" alt="Band" class="work-img">
           </div>
-          <div class="work-info">
-            <div class="work-title-en">ARTIST / MUSIC</div>
-            <h3 class="work-title">バンド活動 (Gt/Vo)</h3>
-            <p class="work-desc">
+          <div class="work-content fade-up">
+            <span class="hero-tag">Artist / Music</span>
+            <h3 class="text-medium" style="margin-bottom:16px;">バンド活動 (Gt/Vo)</h3>
+            <p class="text-body" style="margin-bottom:32px;">
               作詞作曲からステージ演出まで。演者としての視点を企画にも活かしています。
             </p>
-            <a href="#media" style="color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; gap:8px;">WATCH VIDEO <i class="fas fa-arrow-right"></i></a>
+            <a href="#media" class="btn-text">
+              動画を見る <i class="fas fa-chevron-right" style="font-size:0.8rem;"></i>
+            </a>
           </div>
         </div>
 
-        <div class="work-card">
-          <div class="work-img-wrapper">
-            <img src="images/work-teacher-main.jpg" class="work-img" alt="Teach">
+        <div class="work-item">
+          <div class="work-visual fade-up">
+            <img src="images/work-teacher-main.jpg" alt="Teach" class="work-img">
           </div>
-          <div class="work-info">
-            <div class="work-title-en">EDUCATION</div>
-            <h3 class="work-title">数学家庭教師</h3>
-            <p class="work-desc">
+          <div class="work-content fade-up">
+            <span class="hero-tag">Education</span>
+            <h3 class="text-medium" style="margin-bottom:16px;">数学家庭教師</h3>
+            <p class="text-body" style="margin-bottom:32px;">
               誤答データの分析と可視化による、ロジカルな指導を実践。生徒の偏差値を大幅に向上させました。
             </p>
-            <a href="docs/teacher_progress.pdf" target="_blank" style="color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; gap:8px;">VIEW REPORT <i class="fas fa-arrow-right"></i></a>
+            <a href="docs/teacher_progress.pdf" target="_blank" class="btn-text">
+              指導レポートを見る <i class="fas fa-chevron-right" style="font-size:0.8rem;"></i>
+            </a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <section id="process" class="section-padding" style="background:var(--bg-sub);">
+  <section id="process" class="section-gray section-padding">
     <div class="container">
-      <h2 class="section-title">Workflow</h2>
+      <h2 class="text-medium fade-up" style="margin-bottom:80px; text-align:center;">My Workflow.</h2>
       <div class="process-flow">
-        
-        <div class="card-panel step-card">
-          <span class="step-num">01.</span>
-          <h4 class="step-title">問いの定義</h4>
-          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.8;">
-            表面的な課題ではなく、「本質的に何を解決すべきか」「誰をどう喜ばせたいか」を言語化します。
+        <div class="step-item fade-up">
+          <span class="step-num">01. Define</span>
+          <h4 class="text-medium" style="font-size:1.5rem; margin-bottom:16px;">問いの定義</h4>
+          <p class="text-body">
+            表面的な課題ではなく、「本質的に何を解決すべきか」を言語化します。
           </p>
         </div>
-
-        <div class="card-panel step-card">
-          <span class="step-num">02.</span>
-          <h4 class="step-title">構造化と分解</h4>
-          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.8;">
-            予算・時間・人のリソースを正確に把握し、実現可能な具体的なタスクへと落とし込みます。
+        <div class="step-item fade-up" style="transition-delay: 0.1s;">
+          <span class="step-num">02. Structure</span>
+          <h4 class="text-medium" style="font-size:1.5rem; margin-bottom:16px;">構造化と分解</h4>
+          <p class="text-body">
+            リソースを把握し、実現可能な具体的なタスクへと落とし込みます。
           </p>
         </div>
-
-        <div class="card-panel step-card">
-          <span class="step-num">03.</span>
-          <h4 class="step-title">仮説と検証</h4>
-          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.8;">
-            数字（データ）と熱量（エモーション）の両面から仮説を立て、小さく試して改善を繰り返します。
+        <div class="step-item fade-up" style="transition-delay: 0.2s;">
+          <span class="step-num">03. Test</span>
+          <h4 class="text-medium" style="font-size:1.5rem; margin-bottom:16px;">仮説と検証</h4>
+          <p class="text-body">
+            データと熱量の両面から仮説を立て、小さく試して改善を繰り返します。
           </p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <section id="docs" class="section-padding">
+  <section id="docs" class="section-dark section-padding">
     <div class="container">
-      <h2 class="section-title">Archives</h2>
       <div class="bento-grid">
-        <div class="card-panel bento-item bi-1">
-          <h3 style="font-size:1.2rem; color:var(--text-main); margin-bottom:24px; display:flex; align-items:center; gap:12px; font-weight:700;">
-            <span class="doc-icon"><i class="far fa-folder-open"></i></span>Documents
-          </h3>
+        <div class="bento-item bi-large section-dark fade-up" style="background:#111;">
+          <h3 class="text-medium" style="margin-bottom:24px;">Documents.</h3>
           <ul class="doc-list">
             <li>
-              <a href="docs/plan_live.pdf" target="_blank">学園祭ライブ企画書 <span style="font-size:0.75rem; background:var(--bg-sub); padding:4px 8px; border-radius:4px; color:var(--text-muted); margin-left:8px; font-weight:500;">PDF</span></a>
-              <i class="fas fa-download" style="color:var(--border);"></i>
+              <a href="docs/plan_live.pdf" target="_blank"><i class="far fa-folder-open"></i> 学園祭ライブ企画書 (PDF)</a>
+              <i class="fas fa-download text-body"></i>
             </li>
             <li>
-              <a href="docs/plan_edu_entertainment.pdf" target="_blank">教育エンタメ企画案 <span style="font-size:0.75rem; background:var(--bg-sub); padding:4px 8px; border-radius:4px; color:var(--text-muted); margin-left:8px; font-weight:500;">PDF</span></a>
-              <i class="fas fa-download" style="color:var(--border);"></i>
+              <a href="docs/plan_edu_entertainment.pdf" target="_blank"><i class="far fa-folder-open"></i> 教育エンタメ企画案 (PDF)</a>
+              <i class="fas fa-download text-body"></i>
             </li>
             <li>
-              <a href="docs/teacher_progress.pdf" target="_blank">指導進捗報告書 <span style="font-size:0.75rem; background:var(--bg-sub); padding:4px 8px; border-radius:4px; color:var(--text-muted); margin-left:8px; font-weight:500;">PDF</span></a>
-              <i class="fas fa-download" style="color:var(--border);"></i>
+              <a href="docs/teacher_progress.pdf" target="_blank"><i class="far fa-folder-open"></i> 指導進捗報告書 (PDF)</a>
+              <i class="fas fa-download text-body"></i>
             </li>
           </ul>
         </div>
 
-        <div class="card-panel bento-item bi-4" id="media">
-           <h3 style="font-size:1.2rem; color:var(--text-main); margin-bottom:24px; display:flex; align-items:center; gap:12px; font-weight:700;">
-             <span class="doc-icon"><i class="fas fa-play-circle"></i></span>Media
-           </h3>
+        <div class="bento-item bi-large section-dark fade-up" id="media" style="background:#111;">
+           <h3 class="text-medium" style="margin-bottom:24px;">Media.</h3>
            <div style="display:flex; gap:24px; flex-wrap:wrap;">
-             <div style="flex:1; min-width:280px;">
-               <video controls poster="images/work-fes-main.jpg" style="width:100%; border-radius:var(--radius); border:1px solid var(--border);">
+             <div style="flex:1; min-width:250px;">
+               <video controls poster="images/work-fes-main.jpg" style="width:100%; border-radius:var(--radius);">
                  <source src="videos/fes-digest.mp4" type="video/mp4">
                </video>
-               <p style="font-size:0.9rem; color:var(--text-muted); margin-top:12px; text-align:center; font-weight:500;">友好祭ダイジェスト</p>
+               <p class="text-body" style="font-size:0.9rem; margin-top:12px;">友好祭ダイジェスト</p>
              </div>
-             <div style="flex:1; min-width:280px;">
-               <video controls poster="images/gallery-band-live.jpg" style="width:100%; border-radius:var(--radius); border:1px solid var(--border);">
+             <div style="flex:1; min-width:250px;">
+               <video controls poster="images/gallery-band-live.jpg" style="width:100%; border-radius:var(--radius);">
                  <source src="videos/band-live-short.mp4" type="video/mp4">
                </video>
-               <p style="font-size:0.9rem; color:var(--text-muted); margin-top:12px; text-align:center; font-weight:500;">バンドライブ演奏</p>
+               <p class="text-body" style="font-size:0.9rem; margin-top:12px;">バンドライブ演奏</p>
              </div>
            </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <footer id="contact">
-    <div class="container footer-content">
-      
-      <div>
-        <div class="footer-logo">AKIRA <span>MIYAZAKI</span></div>
-        <p style="color:#CCCCCC; font-size:0.9rem; line-height:1.8; margin-bottom:32px; max-width:400px;">
-          大阪公立大学 工学部。<br>
-          論理と熱量を掛け合わせ、新しい価値を創造します。<br>
-          お問い合わせは下記ボタン、またはSNSよりお願いいたします。
-        </p>
-        <div class="footer-links">
-          <a href="https://github.com/akimiya10p-eng" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-          <a href="https://x.com/Taki_Renya" target="_blank"><i class="fab fa-twitter"></i> X (Twitter)</a>
-          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-        </div>
-        <p class="copyright">&copy; 2025 Akira Miyazaki. All Rights Reserved.</p>
-      </div>
-      
-      <div>
-        <h3 class="contact-heading">Contact</h3>
-        <p style="color:#CCCCCC; font-size:0.9rem; margin-bottom:24px;">
-          私の経験や考え方に興味をお持ちいただけましたら、<br>ぜひお気軽にご連絡ください。
-        </p>
-        <a href="mailto:akimiya10p@gmail.com" class="contact-btn">
-          <i class="fas fa-envelope"></i> お問い合わせはこちら
-        </a>
-      </div>
+  <section id="contact" class="section-padding" style="text-align:center;">
+    <div class="container fade-up">
+      <h2 class="text-medium" style="margin-bottom:24px;">Let's Create Together.</h2>
+      <p class="text-body" style="max-width:600px; margin:0 auto 40px;">
+        最後までご覧いただきありがとうございます。<br>
+        ぜひお気軽にご連絡ください。
+      </p>
+      <a href="mailto:akimiya10p@gmail.com" class="btn btn-primary">お問い合わせ</a>
+    </div>
+  </section>
 
+  <footer>
+    <div class="container">
+      <div class="nav-wrapper" style="align-items: flex-start;">
+        <div>
+          <div class="logo" style="margin-bottom:16px;">Akira Miyazaki</div>
+          <p class="text-body" style="font-size:0.8rem;">Designed and built with logic & passion.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/akimiya10p-eng" target="_blank">GitHub</a>
+          <a href="https://x.com/Taki_Renya" target="_blank">X (Twitter)</a>
+        </div>
+      </div>
+      <div style="margin-top:40px; padding-top:20px; border-top:1px solid rgba(0,0,0,0.1); font-size:0.8rem;">
+        Copyright © 2025 Akira Miyazaki. All rights reserved.
+      </div>
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <script>
-    // Typing Effect (Simple)
+    // GSAPプラグインの登録
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. フェードアップアニメーション (.fade-up)
+    gsap.utils.toArray('.fade-up').forEach(element => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 85%', // 画面の85%の位置に来たら開始
+          toggleActions: 'play none none none', // 一度だけ再生
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out' // Appleらしい滑らかな加減速
+      });
+    });
+
+    // 2. パララックス効果 (.img-parallax)
+    gsap.utils.toArray('.img-parallax').forEach(img => {
+      gsap.to(img, {
+        scrollTrigger: {
+          trigger: img.parentElement, // 親要素（フレーム）をトリガーに
+          start: 'top bottom', // フレームが画面下に入ったら
+          end: 'bottom top',   // フレームが画面上に出たら
+          scrub: 1, // スクロールに滑らかに追従させる（数値が大きいほど遅れる）
+        },
+        y: '20%', // スクロールに合わせて画像を下に20%動かす
+        ease: 'none'
+      });
+    });
+
+    // 3. ヘッダーの背景色切り替え（黒背景セクション用）
+    ScrollTrigger.create({
+      trigger: '#about', // 黒背景セクションの開始点
+      start: 'top top',  // セクション上部が画面上部に到達したら
+      endTrigger: '#works', // 次の白背景セクションの手前まで
+      end: 'top top',
+      onEnter: () => document.body.classList.add('dark-mode'),
+      onLeaveBack: () => document.body.classList.remove('dark-mode'),
+      onEnterBack: () => document.body.classList.add('dark-mode'),
+      onLeave: () => document.body.classList.remove('dark-mode'),
+    });
+    // Archivesセクション用にもう一つ作成
+    ScrollTrigger.create({
+      trigger: '#docs',
+      start: 'top top',
+      end: 'bottom top',
+      onEnter: () => document.body.classList.add('dark-mode'),
+      onLeaveBack: () => document.body.classList.remove('dark-mode'),
+    });
+
+    // 4. タイピング演出 (シンプル版)
     const textElement = document.getElementById('typing-text');
     const phrases = ["Designing Values.", "Logical Thinking.", "Creative Passion."];
     let phraseIndex = 0;
@@ -550,42 +582,15 @@
         textElement.textContent = currentPhrase.substring(0, charIndex + 1);
         charIndex++;
       }
-
       let typeSpeed = isDeleting ? 50 : 100;
-
       if (!isDeleting && charIndex === currentPhrase.length) {
-        typeSpeed = 2500;
-        isDeleting = true;
+        typeSpeed = 2500; isDeleting = true;
       } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 500;
+        isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500;
       }
-
       setTimeout(type, typeSpeed);
     }
     document.addEventListener('DOMContentLoaded', type);
-
-    // Scroll Spy & Header bg
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) header.style.boxShadow = "0 4px 12px rgba(0,0,0,0.05)";
-      else header.style.boxShadow = "none";
-      
-      const sections = document.querySelectorAll('section, footer');
-      const navLi = document.querySelectorAll('nav a');
-      let current = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (scrollY >= sectionTop - 200) current = section.getAttribute('id');
-      });
-      
-      navLi.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href').includes(current)) a.classList.add('active');
-      });
-    });
   </script>
 </body>
 </html>
