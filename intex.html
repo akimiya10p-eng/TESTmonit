@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miyazaki's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- 基本設定 --- */
+        :root {
+            --primary-color: #2c3e50; /* 信頼感のあるネイビー */
+            --accent-color: #3498db;  /* 知的なブルー */
+            --bg-light: #f9f9f9;
+            --text-color: #333;
+        }
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+        img, video { max-width: 100%; display: block; border-radius: 8px; }
+        
+        /* --- ヘッダー --- */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
+        .nav-links a { margin-left: 20px; color: var(--primary-color); font-weight: 500; }
+
+        /* --- ヒーローセクション（自己紹介） --- */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: var(--bg-light);
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+        .btn:hover { background: var(--primary-color); }
+
+        /* --- セクション共通 --- */
+        section { padding: 60px 0; }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- Works（活動実績） --- */
+        .work-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        .work-item:nth-child(even) { flex-direction: row-reverse; }
+        .work-content, .work-media { flex: 1; min-width: 300px; }
+        .work-media img { width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .tags span {
+            background: #e1f0fa;
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 5px;
+        }
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+            border-bottom: 1px solid var(--accent-color);
+        }
+        .doc-link i { margin-right: 5px; }
+
+        /* --- Gallery（写真・動画） --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .gallery-item img:hover { transform: scale(1.03); }
+        .video-container video { width: 100%; border-radius: 8px; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">My Portfolio</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#works">Works</a>
+                    <a href="#gallery">Gallery</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about" class="hero">
+        <div class="container">
+            <img src="images/profile.jpg" alt="プロフィール写真" class="profile-img">
+            <h1>Miyazaki Tarou</h1>
+            <p>大阪公立大学 | 友好祭実行委員会 | なかもず軽音楽部</p>
+            <p>「企画力」と「熱意」で、周囲を巻き込み新しい価値を創造します。</p>
+            <a href="docs/resume_miyazaki.pdf" target="_blank" class="btn">
+                <i class="fas fa-file-pdf"></i> 履歴書を見る
+            </a>
+        </div>
+    </section>
+
+    <section id="works">
+        <div class="container">
+            <h2>Main Works</h2>
+
+            <div class="work-item">
+                <div class="work-media">
+                    <img src="images/work-fes-main.jpg" alt="友好祭の様子">
+                </div>
+                <div class="work-content">
+                    <h3>友好祭実行委員会 - ステージ企画統括</h3>
+                    <div class="tags">
+                        <span>リーダーシップ</span>
+                        <span>企画運営</span>
+                        <span>折衝力</span>
+                    </div>
+                    <p>来場者数X万人を誇る大学祭にて、メインステージの企画・運営を担当しました。出演者や機材業者との調整を行い、トラブルのない進行を実現しました。</p>
+                    
+                    <a href="docs/plan_live.pdf" target="_blank" class="doc-link">
+                        <i class="fas fa-file-alt"></i> ステージ企画書を見る (PDF)
+                    </a>
+                    <br>
+                    <a href="docs/plan_edu_entertainment.pdf" target="_blank" class="doc-link">
+                        <i class="fas fa-file-alt"></i> 教育企画案を見る (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <div class="work-item">
+                <div class="work-media">
+                    <img src="images/work-band-main.jpg" alt="バンド演奏">
+                </div>
+                <div class="work-content">
+                    <h3>なかもず軽音楽部 - 部長</h3>
+                    <div class="tags">
+                        <span>チームビルディング</span>
+                        <span>継続力</span>
+                        <span>Guitar</span>
+                    </div>
+                    <p>部員100名を超える軽音部の部長として、練習環境の改善や新歓イベントのオンライン化を推進。退部率を昨対比で20%削減しました。</p>
+                    
+                    <div style="margin-top: 15px;">
+                        <p><small>▼ ライブパフォーマンス (Short Ver.)</small></p>
+                        <video controls src="videos/band-live-short.mp4" poster="images/gallery-band-live.jpg" style="max-height: 200px;"></video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="work-item">
+                <div class="work-media">
+                    <img src="images/work-teacher-main.jpg" alt="教育実習">
+                </div>
+                <div class="work-content">
+                    <h3>教育実習・学習支援ボランティア</h3>
+                    <div class="tags">
+                        <span>プレゼン力</span>
+                        <span>傾聴力</span>
+                    </div>
+                    <p>教育実習では「生徒が主体的に考える授業」をテーマに指導案を作成。生徒アンケートで高評価をいただきました。</p>
+                    <a href="docs/teacher_progress.pdf" target="_blank" class="doc-link">
+                        <i class="fas fa-file-alt"></i> 実習報告書・指導案 (PDF)
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="gallery" style="background: #f9f9f9;">
+        <div class="container">
+            <h2>Gallery & Videos</h2>
+            <p style="text-align: center; margin-bottom: 30px;">活動の様子を写真と動画で紹介します。</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="images/gallery-fes-crowd.jpg" alt="学祭の観衆"></div>
+                <div class="gallery-item"><img src="images/gallery-fes-stage.jpg" alt="学祭ステージ"></div>
+                <div class="gallery-item"><img src="images/gallery-fes-backstage.jpg" alt="学祭裏方"></div>
+                <div class="gallery-item"><img src="images/gallery-guitar.jpg" alt="ギター"></div>
+                <div class="gallery-item"><img src="images/gallery-teacher.jpg" alt="授業風景"></div>
+                
+                <div class="gallery-item video-container">
+                    <video controls src="videos/fes-digest.mp4" style="width: 100%; height: 200px; object-fit: cover;"></video>
+                    <p style="font-size: 0.8rem; text-align: center;">友好祭ダイジェスト</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Miyazaki Tarou. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem;">Created for Job Application</p>
+        </div>
+    </footer>
+
+</body>
+</html>
